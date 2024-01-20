@@ -20,8 +20,6 @@
 - Open the file `includes/env.inc.php`.
 - Modify the `APP_URL` variable based on your domain name. If you are using localhost, you can leave it as is.
 
-**Note:** Always remember to secure your configuration files and never expose sensitive information in public repositories. Ensure that you have backups before making any database changes.
-
 Feel free to reach out if you encounter any issues or need further assistance!
 
 ## About
