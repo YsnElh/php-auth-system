@@ -3,35 +3,25 @@
 if($_SERVER["REQUEST_METHOD"] === "POST"){
     
     require_once "../env.inc.php";
-    $allowedOrigins = array(APP_URL, APP_URL);
-    $origin = $_SERVER['HTTP_ORIGIN'];
-    
-    if (in_array($origin, $allowedOrigins)) {
-        header('Access-Control-Allow-Origin: ' . $origin);
-    } else {
-        header('HTTP/1.1 403 Forbidden');
-        die();
-    }
-
     require_once '../config_session.inc.php';
-
-    if (!isset($_POST['_token']) && !isset($_SESSION['_token'])) {
-        header('HTTP/1.1 403 Forbidden');
-        echo 'Access Forbidden - token not set';
+        
+    $allowedOrigins = [APP_URL, APP_URL];
+    $origin = $_SERVER['HTTP_ORIGIN'];
+        
+    if (!in_array($origin, $allowedOrigins)) {
+        http_response_code(403);
         die();
     }
     
-    if ($_POST['_token'] == $_SESSION['_token']) {
-        if (time() >= $_SESSION["token-expire"]) {
-            die('Token expired, Reload the form');
-        }
-        unset($_SESSION['_token']);
-        unset($_SESSION['token-expire']);
-    }else{
-        header('HTTP/1.1 403 Forbidden');
-        echo 'Access Forbidden - token Mismatch';
-        die();
+    if (!isset($_POST['_token'], $_SESSION['_token']) || $_POST['_token'] !== $_SESSION['_token']) {
+        die('Access Forbidden - Token Mismatch or not set');
     }
+    
+    if (time() >= $_SESSION["token-expire"]) {
+        die('Token expired, Reload the form');
+    }
+    
+    unset($_SESSION['_token'], $_SESSION['token-expire']);
     
       
     $name = $_POST["name"];
@@ -89,7 +79,10 @@ if($_SERVER["REQUEST_METHOD"] === "POST"){
         die();
     } catch (PDOException $e) {
         die("Query Faild: " . $e->getMessage());
+    }finally{
+        $pdo = null;
     }
+    
 }else{
     header("Location: ../../index.php");
     die();

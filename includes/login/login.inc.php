@@ -5,10 +5,8 @@ if($_SERVER["REQUEST_METHOD"] === "POST"){
     $allowedOrigins = array(APP_URL, APP_URL);
     $origin = $_SERVER['HTTP_ORIGIN'];
     
-    if (in_array($origin, $allowedOrigins)) {
-        header('Access-Control-Allow-Origin: ' . $origin);
-    } else {
-        header('HTTP/1.1 403 Forbidden');
+    if (!in_array($origin, $allowedOrigins)) {
+        http_response_code(403);
         die();
     }
 
@@ -24,20 +22,15 @@ if($_SERVER["REQUEST_METHOD"] === "POST"){
         //ERROR HANDLER
         $errors = [];
 
-        if(is_inputs_empty($login_idn,$password)){
-            $errors["empty_inputs"] = "Fill in the required fields (*)!";
-        }
-
         $result = get_user($pdo, $login_idn);
+        if (is_inputs_empty($login_idn, $password)) {
+            $errors["empty_inputs"] = "Fill in the required fields (*)!";
+        }else{
+            if (is_login_idn_wrong($result) || is_password_wrong($password, $result['password'])) {
+                $errors["login_incorrect"] = "Incorrect email or password!";
+            }
+        }
         
-        if (is_login_idn_wrong($result)) {
-            $errors["login_incorrect"] = "Incorrect Login info!";
-        }
-        if(!is_login_idn_wrong($result) && is_password_wrong($password, $result['password'])){
-            $errors["login_incorrect"] = "Incorrect Login info!";
-        }
-
-
         require_once '../config_session.inc.php';
         
 

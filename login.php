@@ -23,11 +23,11 @@
     <div class="container">
         <form action="./includes/login/login.inc.php" method="post">
             <div class="mb-3">
-                <label for="email" class="form-label">Email</label>
+                <label for="email" class="form-label">Email <span class="text-danger">*</span></label>
                 <input type="text" name="email" class="form-control" id="email">
             </div>
             <div class="mb-3">
-                <label for="password" class="form-label">Password</label>
+                <label for="password" class="form-label">Password <span class="text-danger">*</span></label>
                 <input type="password" name="password" class="form-control" id="password">
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>
