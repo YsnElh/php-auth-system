@@ -13,7 +13,7 @@
 
 - Open the file `includes/config_session.inc.php`.
 - Change the value on line 9 based on your domain name. If you are using localhost, you can leave it as is.
-- Adjust the value on line 10 based on the name of the folder where this project is located.
+- Adjust the value on line 10 based on the name of the folder where this project is located. If you are using the domain name as the root, you can put a slash only '/'.
 
 ## Step 4: Set Environment Variables
 
