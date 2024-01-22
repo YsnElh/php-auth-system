@@ -18,7 +18,7 @@
 </head>
 
 <body>
-    <?php include("./Components/header.php") ?>
+    <?php include_once("./Components/header.php") ?>
     <div class="container">
         <form action="./includes/signup/signup.inc.php" method="post">
             <input type="hidden" name="_token" value="<?php generateCSRFToken() ?>">

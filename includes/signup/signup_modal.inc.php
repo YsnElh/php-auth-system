@@ -3,14 +3,17 @@
 declare(strict_types=1);
 
 
-function get_email(object $pdo, string $email){
+function get_email(object $pdo, string $email):bool{
     $query = "SELECT email FROM users WHERE email = :email;";
     $stmt = $pdo->prepare($query);
     $stmt->bindParam(":email" , $email);
     $stmt->execute();
 
     $result = $stmt->fetch(PDO::FETCH_ASSOC);
-    return $result;
+    if ($result) {
+        return true;
+    }
+    return false;
 }
 
 function set_user(object $pdo, string $name, string $email, string $pwd) {

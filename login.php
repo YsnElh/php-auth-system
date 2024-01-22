@@ -19,7 +19,7 @@
 </head>
 
 <body>
-    <?php include("./Components/header.php") ?>
+    <?php include_once("./Components/header.php") ?>
     <div class="container">
         <form action="./includes/login/login.inc.php" method="post">
             <div class="mb-3">

@@ -37,33 +37,30 @@ if($_SERVER["REQUEST_METHOD"] === "POST"){
         if(is_inputs_empty($email,$password,$name)){
             $errors["empty_inputs"] = "Fill in the required fields (*)!";
         }
-        if(!empty($email)){
-            if(is_email_invalid($email)){
-                $errors["invalid_email"] = "Invalid Email used!";
-            }
+
+        if (!empty($email) && is_email_invalid($email)) {
+            $errors["invalid_email"] = "Invalid Email used!";
         }
+        
         if(is_email_registred($pdo,$email)){
             $errors["email_registred"] = "Email already registred!";
         }
-        if(!empty($password)){
-            if(is_password_invalid($password)){
-                $errors["password_invalid"] = "Password is weak!";
-            }
+
+        if (!empty($password) && is_password_invalid($password)) {
+            $errors["password_invalid"] = "Password is weak!";
         }
-        if($errors){
-           $_SESSION["register_errors"] = $errors;
-           $registerData = [
-                "name" => $name,
-                "email" => $email,
-            ];
-           $_SESSION["register_data"] = $registerData;
-           header("Location: ../../signup.php");
-           die();
+        
+        if ($errors) {
+            $_SESSION["register_errors"] = $errors;
+            $_SESSION["register_data"] = ["name" => $name, "email" => $email];
+                
+            header("Location: ../../signup.php");
+            die();
         }
         // INSERT NEW USER
         $newUser = create_user($pdo, $name, $email, $password);
-        // handle session ID
-
+        
+        // Handle session ID
         $newSessionID = session_create_id();
         $sessionID = $newSessionID . "_" . $newUser['id'];
         session_id($sessionID);
@@ -81,6 +78,7 @@ if($_SERVER["REQUEST_METHOD"] === "POST"){
         die("Query Faild: " . $e->getMessage());
     }finally{
         $pdo = null;
+        $stmt = null;
     }
     
 }else{

@@ -11,11 +11,7 @@ function is_email_invalid(string $email): bool {
 }
 
 function is_email_registred(object $pdo,string $email){
-    if (get_email( $pdo , $email )) {
-        return true;
-    }else{
-        return false;
-    }
+    return get_email( $pdo , $email );
 }
 
 function is_password_invalid(string $pwd){

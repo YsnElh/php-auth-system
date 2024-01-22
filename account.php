@@ -18,7 +18,7 @@
 </head>
 
 <body>
-    <?php include("./Components/header.php") ?>
+    <?php include_once("./Components/header.php") ?>
     <?php print_infos() ?>
     <form action="./includes/login/logout.inc.php" method="post">
         <button class="btn btn-outline-primary m-2" type="submit">LOG OUT</button>

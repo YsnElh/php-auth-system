@@ -12,8 +12,8 @@
 ## Step 3: Configure Session Settings
 
 - Open the file `includes/config_session.inc.php`.
-- Change the value on line 9 based on your domain name. If you are using localhost, you can leave it as is.
-- Adjust the value on line 10 based on the name of the folder where this project is located. If you are using the domain name as the root, you can put a slash only '/'.
+- Change the value **domain** on line 9 based on your domain name. If you are using localhost, you can leave it as is.
+- Adjust the value **path** on line 10 based on the name of the folder where this project is located. If you are using the domain name as the root, you can put a slash only '/'.
 
 ## Step 4: Set Environment Variables
 
@@ -24,4 +24,4 @@ Feel free to reach out if you encounter any issues or need further assistance!
 
 ## About
 
-This PHP Authentication System provides secure authentication using the MVC (Model-View-Controller) pattern. It is designed to offer a robust and reliable solution for user authentication in web applications.
+This **PHP** Authentication System provides secure authentication using the **MVC** (Model-View-Controller) pattern. It is designed to offer a robust and reliable solution for user authentication in web applications.

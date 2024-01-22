@@ -23,6 +23,7 @@ if($_SERVER["REQUEST_METHOD"] === "POST"){
         $errors = [];
 
         $result = get_user($pdo, $login_idn);
+        
         if (is_inputs_empty($login_idn, $password)) {
             $errors["empty_inputs"] = "Fill in the required fields (*)!";
         }else{
